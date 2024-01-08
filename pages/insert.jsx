@@ -1,17 +1,18 @@
 import { useState } from 'react';
-import { 
-    Button, 
-    TextField, 
-    Typography, 
-    Grid, 
-    Table, 
-    TableBody, 
-    TableCell, 
-    TableContainer, 
-    TableHead, 
-    TableRow, 
+import { useRouter } from 'next/navigation';
+import {
+    Button,
+    TextField,
+    Typography,
+    Grid,
+    Table,
+    TableBody,
+    TableCell,
+    TableContainer,
+    TableHead,
+    TableRow,
     Paper,
-    MenuItem 
+    MenuItem
 } from '@mui/material';
 
 const InsertData = () => {
@@ -47,6 +48,7 @@ const InsertData = () => {
     });
     const [tableData, setTableData] = useState([])
     const [response, setResponse] = useState('');
+    const { push } = useRouter();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -70,9 +72,11 @@ const InsertData = () => {
                 },
                 body: JSON.stringify(tableData),
             });
-
             const result = await response.json();
             setResponse(result.message);
+            if (result.status === true) {
+                push('/gettoday')
+            }
         } catch (error) {
             console.error('Error inserting data:', error);
             setResponse('Error inserting data');
@@ -91,9 +95,8 @@ const InsertData = () => {
                 Insert Data
             </Typography>
             <Grid container spacing={2}>
-                <Grid item xs={12}>
+                <Grid item md={12}>
                     <TextField
-                        fullWidth
                         label="Date"
                         type="date"
                         variant="outlined"
