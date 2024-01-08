@@ -95,8 +95,9 @@ const InsertData = () => {
                 Insert Data
             </Typography>
             <Grid container spacing={2}>
-                <Grid item md={12}>
+                <Grid item xs={12}>
                     <TextField
+                        fullWidth
                         label="Date"
                         type="date"
                         variant="outlined"
