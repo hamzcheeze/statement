@@ -9,7 +9,7 @@ export default function Home() {
   const { push } = useRouter();
   useEffect(() => {
     // Redirect to /gettoday immediately
-    push('/gettoday');
+    push('/getall');
   }, []);
 
   return (
