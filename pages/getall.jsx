@@ -14,6 +14,7 @@ import {
   Button,
 } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import CustomAppBar from '../components/AppBar';
 
 const GetAll = () => {
   const [data, setData] = useState([]);
@@ -32,11 +33,7 @@ const GetAll = () => {
     fetchData();
   }, []);
 
-  const handleRedirect = (e) => {
-    const { value } = e.target;
-    if (value == "today") {
-      push('/gettoday');
-    }
+  const handleRedirect = () => {
     push('/insert');
   };
 
@@ -49,23 +46,15 @@ const GetAll = () => {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
+      <CustomAppBar />
       <main style={{ padding: '20px', paddingRight: '20px' }}>
-        <h1>All Expense</h1>
+        <h1>All Data</h1>
         <Box display="flex" justifyContent="flex-end" marginTop={2}>
-          <Button
-            variant="contained"
-            color="secondary"
-            margin="normal"
-            value="today"
-            onClick={handleRedirect}>
-            Show Today
-          </Button>
           &nbsp;
           <Button
             variant="contained"
             color="primary"
             margin="normal"
-            value="insert"
             onClick={handleRedirect}>
             Create
           </Button>

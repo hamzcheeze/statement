@@ -14,6 +14,7 @@ import {
     Box
 } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import CustomAppBar from '../components/AppBar';
 
 const GetAll = () => {
     const [data, setData] = useState([]);
@@ -51,8 +52,9 @@ const GetAll = () => {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
+            <CustomAppBar />
             <main style={{ padding: '20px', paddingRight: '20px' }}>
-                <h1>Today Expense</h1>
+                <h1>Today Data</h1>
                 <Box display="flex" justifyContent="flex-end" marginTop={2}>
                     <Button
                         variant="contained"

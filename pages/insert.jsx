@@ -17,6 +17,7 @@ import {
     MenuItem
 } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
+import CustomAppBar from '../components/AppBar';
 
 const InsertData = () => {
     const type = [
@@ -113,10 +114,9 @@ const InsertData = () => {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
+            <CustomAppBar />
             <main style={{ padding: '20px', paddingRight: '20px' }}>
-                <Typography variant="h4" gutterBottom>
-                    Insert Data
-                </Typography>
+                <h1>Insert Data</h1>
                 <Grid container spacing={2}>
                     <Grid item xs={12}>
                         <TextField
