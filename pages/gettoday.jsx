@@ -1,13 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import {
-    Brightness4Icon,
-    Brightness7Icon
-} from '@mui/icons-material';
-import {
     createTheme,
     ThemeProvider,
-    useMediaQuery,
     Button,
     Table,
     TableBody,
@@ -16,10 +11,9 @@ import {
     TableHead,
     TableRow,
     Paper,
-    IconButton,
-    Grid,
     Box
 } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const GetAll = () => {
     const [data, setData] = useState([]);
@@ -48,54 +42,62 @@ const GetAll = () => {
             .toFixed(2);
     };
 
+    const darkTheme = createTheme({
+        palette: {
+            mode: 'dark',
+        },
+    });
+
     return (
-        <div>
-            <h1>Data from API</h1>
-            <Box display="flex" justifyContent="flex-end" marginTop={2}>
-                {/* Additional buttons can be added here */}
-                <Button
-                    variant="contained"
-                    color="primary"
-                    margin="normal"
-                    onClick={handleRedirect}>
-                    Create
-                </Button>
-            </Box>
-            <br />
-            <TableContainer component={Paper}>
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Date</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Type</TableCell>
-                            <TableCell>Amount</TableCell>
-                            <TableCell>Channel</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {data.map((item) => (
-                            <TableRow key={item._id}>
-                                <TableCell>{item.date}</TableCell>
-                                <TableCell>{item.name}</TableCell>
-                                <TableCell>{item.type}</TableCell>
-                                <TableCell>{item.amount}</TableCell>
-                                <TableCell>{item.channel}</TableCell>
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline />
+            <main style={{ padding: '20px', paddingRight: '20px' }}>
+                <h1>Today Expense</h1>
+                <Box display="flex" justifyContent="flex-end" marginTop={2}>
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        margin="normal"
+                        onClick={handleRedirect}>
+                        Create
+                    </Button>
+                </Box>
+                <br />
+                <TableContainer component={Paper}>
+                    <Table>
+                        <TableHead>
+                            <TableRow>
+                                <TableCell>Date</TableCell>
+                                <TableCell>Name</TableCell>
+                                <TableCell>Type</TableCell>
+                                <TableCell>Amount</TableCell>
+                                <TableCell>Channel</TableCell>
                             </TableRow>
-                        ))}
-                        <TableRow>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell></TableCell>
-                            <TableCell>
-                                <strong>Total:</strong> {calculateTotalAmount()}
-                            </TableCell>
-                        </TableRow>
-                    </TableBody>
-                </Table>
-            </TableContainer>
-        </div>
+                        </TableHead>
+                        <TableBody>
+                            {data.map((item) => (
+                                <TableRow key={item._id}>
+                                    <TableCell>{item.date}</TableCell>
+                                    <TableCell>{item.name}</TableCell>
+                                    <TableCell>{item.type}</TableCell>
+                                    <TableCell>{item.amount}</TableCell>
+                                    <TableCell>{item.channel}</TableCell>
+                                </TableRow>
+                            ))}
+                            <TableRow>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell></TableCell>
+                                <TableCell>
+                                    <strong>Total:</strong> {calculateTotalAmount()}
+                                </TableCell>
+                            </TableRow>
+                        </TableBody>
+                    </Table>
+                </TableContainer>
+            </main>
+        </ThemeProvider>
     );
 };
 
