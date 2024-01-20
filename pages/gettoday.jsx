@@ -11,7 +11,8 @@ import {
     TableHead,
     TableRow,
     Paper,
-    Box
+    Box,
+    useMediaQuery,
 } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import CustomAppBar from '../components/AppBar';
@@ -19,6 +20,8 @@ import CustomAppBar from '../components/AppBar';
 const GetAll = () => {
     const [data, setData] = useState([]);
     const { push } = useRouter();
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const [darkMode, setDarkMode] = useState(prefersDarkMode);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,14 +48,17 @@ const GetAll = () => {
 
     const darkTheme = createTheme({
         palette: {
-            mode: 'dark',
+            mode: darkMode ? 'dark' : 'light',
         },
     });
 
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            <CustomAppBar />
+            <CustomAppBar
+                darkMode={darkMode}
+                onDarkModeToggle={() => setDarkMode(!darkMode)}
+            />
             <main style={{ padding: '20px', paddingRight: '20px' }}>
                 <h1>Today Data</h1>
                 <Box display="flex" justifyContent="flex-end" marginTop={2}>

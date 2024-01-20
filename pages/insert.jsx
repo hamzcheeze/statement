@@ -14,7 +14,8 @@ import {
     TableHead,
     TableRow,
     Paper,
-    MenuItem
+    MenuItem,
+    useMediaQuery,
 } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import CustomAppBar from '../components/AppBar';
@@ -65,6 +66,8 @@ const InsertData = () => {
     const [tableData, setTableData] = useState([])
     const [response, setResponse] = useState('');
     const { push } = useRouter();
+    const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+    const [darkMode, setDarkMode] = useState(prefersDarkMode);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -107,14 +110,17 @@ const InsertData = () => {
 
     const darkTheme = createTheme({
         palette: {
-            mode: 'dark',
+          mode: darkMode ? 'dark' : 'light',
         },
-    });
+      });
 
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline />
-            <CustomAppBar />
+            <CustomAppBar
+                darkMode={darkMode}
+                onDarkModeToggle={() => setDarkMode(!darkMode)}
+            />
             <main style={{ padding: '20px', paddingRight: '20px' }}>
                 <h1>Insert Data</h1>
                 <Grid container spacing={2}>
