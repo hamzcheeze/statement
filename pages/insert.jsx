@@ -53,6 +53,10 @@ const InsertData = () => {
         {
             value: 'Gas',
             label: 'Gas',
+        },
+        {
+            value: 'Renting',
+            label: 'Renting',
         }
     ];
 
