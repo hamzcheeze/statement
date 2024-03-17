@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         const documents = await collection
             .find({})
             .sort({ "date": -1 })
-            .limit(100)
+            .limit(500)
             .toArray();
         res.status(200).json(documents);
     } catch (error) {
