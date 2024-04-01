@@ -5,12 +5,13 @@ function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+// sample url = http://localhost:3000/api/getbyperiod?startDate=2024-03-01&endDate=2024-03-31&type=food
 export default async function handler(req, res) {
     const urlParams = new URLSearchParams(req.url.split('?')[1]);
     const startDate = urlParams.get('startDate');
     const endDate = urlParams.get('endDate');
-    let type = urlParams.get('type');
-    type = capitalizeFirstLetter(type.toLowerCase());
+    const type = urlParams.get('type');
+    const newType = capitalizeFirstLetter(type.toLowerCase());
 
     if (req.method !== 'GET') {
         return res.status(405).json({ message: 'Method Not Allowed' });
@@ -25,7 +26,7 @@ export default async function handler(req, res) {
             }
         };
         if (type !== 'All') {
-            matchStage.type = type;
+            matchStage.type = newType;
         }
         const documents = await collection.aggregate([
             {
