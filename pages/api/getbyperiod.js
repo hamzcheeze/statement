@@ -25,7 +25,7 @@ export default async function handler(req, res) {
                 $lte: endDate
             }
         };
-        if (type !== "All") {
+        if (newType !== "All") {
             matchStage.type = newType;
         }
         const documents = await collection.aggregate([
@@ -43,7 +43,7 @@ export default async function handler(req, res) {
                 }
             }
         ]).toArray();
-        res.status(200).json(type);
+        res.status(200).json(documents);
     } catch (error) {
         console.error(error);
         res.status(500).json({ message: 'Internal Server Error' });
