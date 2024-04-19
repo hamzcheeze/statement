@@ -25,7 +25,7 @@ export default async function handler(req, res) {
                 $lte: endDate
             }
         };
-        if (type !== 'All') {
+        if (type !== 'All' || type !== 'all') {
             matchStage.type = newType;
         }
         const documents = await collection.aggregate([
