@@ -66,6 +66,10 @@ const InsertData = () => {
             value: 'Joi',
             label: 'Joi',
         },
+        {
+            value: 'Vitamin',
+            label: 'Vitamin',
+        },
     ];
 
     const [formData, setFormData] = useState({
